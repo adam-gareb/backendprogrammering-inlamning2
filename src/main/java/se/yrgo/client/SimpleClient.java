@@ -1,0 +1,22 @@
+package se.yrgo.client;
+
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import se.yrgo.domain.Customer;
+import se.yrgo.services.customers.CustomerManagementMockImpl;
+import se.yrgo.services.customers.CustomerManagementService;
+
+public class SimpleClient {
+
+    public static void main(String[] args) {
+        ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("application.xml");
+
+        CustomerManagementService customerManagement = container.getBean(CustomerManagementMockImpl.class);
+
+        for(Customer customer : customerManagement.getAllCustomers()){
+            System.out.println(customer);
+        }
+
+        container.close();
+    }
+}
