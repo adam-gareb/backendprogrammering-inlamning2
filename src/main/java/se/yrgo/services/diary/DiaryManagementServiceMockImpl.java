@@ -20,13 +20,13 @@ public class DiaryManagementServiceMockImpl implements DiaryManagementService {
 	//Create a list<Action>
 	//In the for each loop going through the list use this condition: "if(action.getOwningUser().equals(requiredUser) && !action.isComplete())" to add a new action to the list. 
 	public List<Action> getAllIncompleteActions(String requiredUser) {
-		List<Action> result = new ArrayList<>();
+		List<Action> incompleteActions = new ArrayList<>();
 		for(Action action : allActions){
 			if(action.getOwningUser().equals(requiredUser) && !action.isComplete()){
-				result.add(action);
+				incompleteActions.add(action);
 			}
 		}
-		return result;
+		return incompleteActions;
 	}
 
 }
