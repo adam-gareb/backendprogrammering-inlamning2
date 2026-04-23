@@ -24,11 +24,12 @@ public class SimpleClient {
 
         // Del 1
         System.out.println("Del 1:\n");
-        CustomerManagementService customerManagement = container.getBean(CustomerManagementMockImpl.class);
+//        CustomerManagementService customerManagement = container.getBean(CustomerManagementMockImpl.class);
 
-        for(Customer customer : customerManagement.getAllCustomers()){
-            System.out.println(customer);
-        }
+        System.out.println("(har kommenterat bean ut för CustomerManagementMockImpl i application.xml och kommenterat ut koden här inne i SimpleClient)");
+//        for(Customer customer : customerManagement.getAllCustomers()){
+//            System.out.println(customer);
+//        }
 
         System.out.println("\n---------------------------\n");
 
@@ -63,7 +64,50 @@ public class SimpleClient {
 
             System.out.println("\n---------------------------\n");
 
+            // Del 3
+            System.out.println("Del 3: \n");
+
+            Customer newCustomer = new Customer("1", "Bradford Clinic", "brad@outlook.com", "0730000000", "Gotta call back!");
+
+            customerService.newCustomer(newCustomer);
+            System.out.println("Skapade kund: " + newCustomer);
+
+            System.out.println("\nAlla kunder:");
+            for (Customer c : customerService.getAllCustomers()) {
+                System.out.println(c);
+            }
+
+            try {
+                Customer found = customerService.findCustomerById("1");
+                System.out.println("\nHittade kund med id " + found);
+            } catch (CustomerNotFoundException e) {
+                System.out.println("Kund hittades inte");
+            }
+
+            newCustomer.setNotes("Uppdaterade notes");
+            customerService.updateCustomer(newCustomer);
+            System.out.println("\nUppdaterade kund: " + customerService.findCustomerById("1").getNotes());
+
+            // Testa findCustomersByName
+            System.out.println("\nSök på namn:");
+            for (Customer c : customerService.findCustomersByName("Bradford Clinic")) {
+                System.out.println(c);
+            }
+
+            // Testa getFullCustomerDetail
+            Customer fullDetail = customerService.getFullCustomerDetail("1");
+            System.out.println("\nFull detalj: " + fullDetail);
+
+            // Testa deleteCustomer
+            customerService.deleteCustomer(newCustomer);
+            System.out.println("\nRaderade kund, alla kunder kvar:");
+            for (Customer c : customerService.getAllCustomers()) {
+                System.out.println(c);
+            }
+
             container.close();
+        } catch (CustomerNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 }

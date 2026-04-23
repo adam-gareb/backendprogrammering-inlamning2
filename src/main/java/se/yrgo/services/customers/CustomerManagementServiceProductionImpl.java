@@ -1,6 +1,7 @@
 package se.yrgo.services.customers;
 
 import se.yrgo.dataaccess.CustomerDao;
+import se.yrgo.dataaccess.CustomerDaoJdbcTemplateImpl;
 import se.yrgo.dataaccess.RecordNotFoundException;
 import se.yrgo.domain.Call;
 import se.yrgo.domain.Customer;
@@ -16,17 +17,27 @@ public class CustomerManagementServiceProductionImpl implements CustomerManageme
 
     @Override
     public void newCustomer(Customer newCustomer) {
-
+        customerDao.create(newCustomer);
     }
 
     @Override
-    public void updateCustomer(Customer changedCustomer) {
-
+    public void updateCustomer(Customer changedCustomer) throws CustomerNotFoundException {
+        try {
+            customerDao.update(changedCustomer);
+        }
+        catch(RecordNotFoundException e){
+            throw new CustomerNotFoundException();
+        }
     }
 
     @Override
-    public void deleteCustomer(Customer oldCustomer) {
-
+    public void deleteCustomer(Customer oldCustomer) throws CustomerNotFoundException {
+        try {
+            customerDao.delete(oldCustomer);
+        }
+        catch (RecordNotFoundException e){
+            throw new CustomerNotFoundException();
+        }
     }
 
     @Override
@@ -41,12 +52,12 @@ public class CustomerManagementServiceProductionImpl implements CustomerManageme
 
     @Override
     public List<Customer> findCustomersByName(String name) {
-        return List.of();
+        return customerDao.getByName(name);
     }
 
     @Override
     public List<Customer> getAllCustomers() {
-        return List.of();
+        return customerDao.getAllCustomers();
     }
 
     @Override

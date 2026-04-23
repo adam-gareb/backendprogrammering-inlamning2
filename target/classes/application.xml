@@ -12,7 +12,8 @@
 		<property name="password" value ="" />
 	</bean>
 
-	<bean id="customerManagementServiceMock" class="se.yrgo.services.customers.CustomerManagementMockImpl"/>
+	<!--För Del 1-->
+<!--	<bean id="customerManagementServiceMock" class="se.yrgo.services.customers.CustomerManagementMockImpl"/>-->
 
 	<bean id="diaryManagementService" class="se.yrgo.services.diary.DiaryManagementServiceMockImpl"/>
 
