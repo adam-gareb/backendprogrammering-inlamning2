@@ -7,6 +7,9 @@ import java.util.Set;
 
 import se.yrgo.domain.Action;
 
+import org.springframework.transaction.annotation.Transactional;
+
+@Transactional
 public class DiaryManagementServiceMockImpl implements DiaryManagementService {
 	
 	private Set<Action> allActions = new HashSet<Action>();

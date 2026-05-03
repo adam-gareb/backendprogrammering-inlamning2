@@ -7,8 +7,10 @@ import se.yrgo.services.customers.CustomerManagementService;
 import se.yrgo.services.customers.CustomerNotFoundException;
 import se.yrgo.services.diary.DiaryManagementService;
 
+import org.springframework.transaction.annotation.Transactional;
 import java.util.Collection;
 
+@Transactional
 public class CallHandlingServiceImpl implements CallHandlingService {
 
     private CustomerManagementService customerService;
