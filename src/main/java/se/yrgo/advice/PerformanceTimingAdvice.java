@@ -12,33 +12,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class PerformanceTimingAdvice {
 
-    @Pointcut("execution(* se.yrgo.services..*(..))")
-    public void serviceMethods() {}
-
-    @Pointcut("execution(* se.yrgo.dataaccess..*(..))")
-    public void dataAccessMethods() {}
-
-    @Pointcut("serviceMethods() || dataAccessMethods()")
-    public void allMethods() {}
-
-    @Around("allMethods()")
+    @Around("execution(* se.yrgo.dataaccess.*.*(..)) || execution(* se.yrgo.services.*.*(..))")
     public Object performTimingMeasurement(ProceedingJoinPoint method) throws Throwable {
-        long startTime = System.nanoTime();
+        long startTime = System.currentTimeMillis();
 
         try {
             Object value = method.proceed();
             return value;
         } finally {
-            long endTime = System.nanoTime();
+            long endTime = System.currentTimeMillis();
             long timeTaken = endTime - startTime;
             System.out.println("Metoden " +
                     method.getSignature().getName() +
-                    " tog " + timeTaken / 1000000 + " ms");
+                    " tog " + timeTaken + " ms");
         }
-    }
-
-    @Before("allMethods()")
-    public void beforeAdviceTesting(JoinPoint jp) {
-        System.out.println("Anropar metoden: " + jp.getSignature().getName());
     }
 }

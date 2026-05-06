@@ -9,8 +9,10 @@ import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
+import org.springframework.stereotype.Repository;
 import se.yrgo.domain.Action;
 
+@Repository
 public class ActionDaoJdbcImpl { //implements ActionDao {
 	private static final String DELETE_SQL = "DELETE FROM ACTION WHERE ACTION_ID=?";
 	private static final String UPDATE_SQL = "UPDATE ACTION SET DETAILS=?, COMPLETE=?, OWNING_USER=?, REQUIRED_BY=? WHERE ACTION_ID=?";
@@ -48,7 +50,6 @@ public class ActionDaoJdbcImpl { //implements ActionDao {
 		this.template.update(DELETE_SQL, oldAction.getActionId());
 	}
 }
-
 
 class ActionRowMapper implements RowMapper<Action> {
 	public Action mapRow(ResultSet rs, int arg1) throws SQLException 	{

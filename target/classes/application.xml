@@ -1,11 +1,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xmlns:context="http://www.springframework.org/schema/context"
-	   xmlns:aop="http://www.springframework.org/schema/aop"
-	   xsi:schemaLocation="
-           http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+	   xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
-           http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+           http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<!-- add your bean definitions here! -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
@@ -18,26 +17,33 @@
 	<!--För Del 1-->
 <!--	<bean id="customerManagementServiceMock" class="se.yrgo.services.customers.CustomerManagementMockImpl"/>-->
 
-	<bean id="diaryManagementService" class="se.yrgo.services.diary.DiaryManagementServiceMockImpl"/>
+<!--	<bean id="diaryManagementService" class="se.yrgo.services.diary.DiaryManagementServiceMockImpl"/>-->
 
-	<bean id="callHandlingService" class="se.yrgo.services.calls.CallHandlingServiceImpl">
-		<constructor-arg ref="customerManagementService"/>
-		<constructor-arg ref="diaryManagementService"/>
-	</bean>
+<!--	<bean id="callHandlingService" class="se.yrgo.services.calls.CallHandlingServiceImpl">-->
+<!--		<constructor-arg ref="customerManagementService"/>-->
+<!--		<constructor-arg ref="diaryManagementService"/>-->
+<!--	</bean>-->
 
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<constructor-arg ref="dataSource"/>
 	</bean>
 
-	<bean id="customerDao" class="se.yrgo.dataaccess.CustomerDaoJdbcTemplateImpl">
-		<constructor-arg ref="jdbcTemplate"/>
-	</bean>
+<!--	<bean id="customerDao" class="se.yrgo.dataaccess.CustomerDaoJdbcTemplateImpl">-->
+<!--		<constructor-arg ref="jdbcTemplate"/>-->
+<!--	</bean>-->
 
-	<bean id="customerManagementService" class="se.yrgo.services.customers.CustomerManagementServiceProductionImpl">
-		<constructor-arg ref="customerDao"/>
+<!--	<bean id="customerManagementService" class="se.yrgo.services.customers.CustomerManagementServiceProductionImpl">-->
+<!--		<constructor-arg ref="customerDao"/>-->
+<!--	</bean>-->
+
+	<bean id="transactionManager"
+		  class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
 	</bean>
 
 	<aop:aspectj-autoproxy/>
 	<context:component-scan base-package="se.yrgo"/>
+
+	<tx:annotation-driven/>
 
 </beans>

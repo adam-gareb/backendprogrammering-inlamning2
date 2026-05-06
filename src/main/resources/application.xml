@@ -17,24 +17,24 @@
 	<!--För Del 1-->
 <!--	<bean id="customerManagementServiceMock" class="se.yrgo.services.customers.CustomerManagementMockImpl"/>-->
 
-	<bean id="diaryManagementService" class="se.yrgo.services.diary.DiaryManagementServiceMockImpl"/>
+<!--	<bean id="diaryManagementService" class="se.yrgo.services.diary.DiaryManagementServiceMockImpl"/>-->
 
-	<bean id="callHandlingService" class="se.yrgo.services.calls.CallHandlingServiceImpl">
-		<constructor-arg ref="customerManagementService"/>
-		<constructor-arg ref="diaryManagementService"/>
-	</bean>
+<!--	<bean id="callHandlingService" class="se.yrgo.services.calls.CallHandlingServiceImpl">-->
+<!--		<constructor-arg ref="customerManagementService"/>-->
+<!--		<constructor-arg ref="diaryManagementService"/>-->
+<!--	</bean>-->
 
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<constructor-arg ref="dataSource"/>
 	</bean>
 
-	<bean id="customerDao" class="se.yrgo.dataaccess.CustomerDaoJdbcTemplateImpl">
-		<constructor-arg ref="jdbcTemplate"/>
-	</bean>
+<!--	<bean id="customerDao" class="se.yrgo.dataaccess.CustomerDaoJdbcTemplateImpl">-->
+<!--		<constructor-arg ref="jdbcTemplate"/>-->
+<!--	</bean>-->
 
-	<bean id="customerManagementService" class="se.yrgo.services.customers.CustomerManagementServiceProductionImpl">
-		<constructor-arg ref="customerDao"/>
-	</bean>
+<!--	<bean id="customerManagementService" class="se.yrgo.services.customers.CustomerManagementServiceProductionImpl">-->
+<!--		<constructor-arg ref="customerDao"/>-->
+<!--	</bean>-->
 
 	<bean id="transactionManager"
 		  class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

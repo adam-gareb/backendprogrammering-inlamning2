@@ -36,7 +36,7 @@ public class SimpleClient {
         //Del 2
         System.out.println("Del 2: \n");
 
-            CustomerManagementService customerService = container.getBean("customerManagementService", CustomerManagementService.class);
+            CustomerManagementService customerService = container.getBean(CustomerManagementService.class);
             CallHandlingService callService = container.getBean(CallHandlingService.class);
             DiaryManagementService diaryService = container.getBean(DiaryManagementService.class);
 
